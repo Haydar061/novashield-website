@@ -6,8 +6,10 @@ import { Shield, Mail, Send, FileText } from "lucide-react";
 const quickLinks = [
   { href: "/", label: "Ana Sayfa" },
   { href: "/hizmetler", label: "Hizmetler" },
-  { href: "/hakkimizda", label: "Hakkimizda" },
+  { href: "/fiyat-hesapla", label: "Fiyat Hesapla" },
+  { href: "/blog", label: "Blog" },
   { href: "/yorumlar", label: "Yorumlar" },
+  { href: "/sss", label: "SSS" },
   { href: "/iletisim", label: "Iletisim" },
 ];
 

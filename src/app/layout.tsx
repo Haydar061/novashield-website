@@ -3,6 +3,9 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LoadingScreen from "@/components/LoadingScreen";
+import CursorGlow from "@/components/CursorGlow";
+import ChatWidget from "@/components/ChatWidget";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const poppins = Poppins({
@@ -31,10 +34,12 @@ export default function RootLayout({
   return (
     <html lang="tr" className={`${inter.variable} ${poppins.variable}`}>
       <body className="bg-[#0a0a0a] text-white font-[family-name:var(--font-inter)] antialiased">
+        <LoadingScreen />
+        <CursorGlow />
         <Navbar />
         <main className="pt-16 min-h-screen">{children}</main>
         <Footer />
-
+        <ChatWidget />
       </body>
     </html>
   );

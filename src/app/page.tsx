@@ -10,6 +10,7 @@ import ParticleBackground from "@/components/ParticleBackground";
 import Counter from "@/components/Counter";
 import ReviewSlider from "@/components/ReviewSlider";
 import ScrollReveal from "@/components/ScrollReveal";
+import BeforeAfter from "@/components/BeforeAfter";
 
 const featuredServices = [
   { icon: Globe, title: "Web Gelistirme", slug: "web-tasarim", desc: "Modern, hizli ve SEO dostu web siteleri" },
@@ -150,6 +151,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Before / After */}
+      <BeforeAfter />
 
       {/* Reviews Slider */}
       <section className="py-20 px-4">
