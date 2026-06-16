@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 export default function CursorGlow() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouse = useRef({ x: 0, y: 0, active: false });
-  const pos = useRef({ x: 0, y: 0 });
+  const pos = useRef({ x: 0, y: 0, initialized: false });
   const particles = useRef<any[]>([]);
   const trail = useRef<{ x: number; y: number; hue: number }[]>([]);
   const hue = useRef(200);
@@ -44,7 +44,13 @@ export default function CursorGlow() {
       mouse.current.y = e.clientY;
       mouse.current.active = true;
     };
-    const onEnter = () => { mouse.current.active = true; };
+    const onEnter = () => {
+      mouse.current.active = true;
+      // Geri gelince direkt mouse pozisyonuna zipla
+      pos.current.x = mouse.current.x;
+      pos.current.y = mouse.current.y;
+      trail.current = [];
+    };
     const onLeave = () => { mouse.current.active = false; };
 
     document.addEventListener("mousemove", onMove, { passive: true });
@@ -130,9 +136,16 @@ export default function CursorGlow() {
         return;
       }
 
-      // Smooth follow
-      pos.current.x += (mouse.current.x - pos.current.x) * 0.25;
-      pos.current.y += (mouse.current.y - pos.current.y) * 0.25;
+      // Ilk hareket: direkt mouse pozisyonuna zipla
+      if (!pos.current.initialized) {
+        pos.current.x = mouse.current.x;
+        pos.current.y = mouse.current.y;
+        pos.current.initialized = true;
+      }
+
+      // Smooth follow - hizli takip
+      pos.current.x += (mouse.current.x - pos.current.x) * 0.5;
+      pos.current.y += (mouse.current.y - pos.current.y) * 0.5;
 
       const cx = pos.current.x;
       const cy = pos.current.y;
